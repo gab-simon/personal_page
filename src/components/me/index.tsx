@@ -46,12 +46,15 @@ const Me = () => {
         </div>
 
         <Reveal delay={0.2} className="md:pt-6">
-          <figure className="group mx-auto w-full max-w-[360px]">
+          <figure
+            className="group mx-auto w-full max-w-[360px]"
+            tabIndex={0}
+          >
             <div className="relative aspect-square overflow-hidden rounded-sm border border-border bg-card">
               <img
                 src={mePhoto}
                 alt="Retrato de Simon"
-                className="h-full w-full object-cover grayscale transition-[filter,transform] duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.01]"
+                className="h-full w-full object-cover grayscale transition-[filter,transform] duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.01] group-focus-within:grayscale-0 group-focus-within:scale-[1.01]"
                 loading="lazy"
               />
             </div>
