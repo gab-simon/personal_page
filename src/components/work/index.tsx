@@ -11,38 +11,49 @@ type WorkEntry = {
 const workEntries: WorkEntry[] = [
   {
     company: "Nestlé Health Science - Puravida",
-    role: "Full stack Developer",
-    period: "2025 jan - today",
+    role: "Software Engineer",
+    period: "Feb 2024 - Present",
     summary:
-      "Atuei em produtos web com foco em performance, consistencia visual e melhor experiencia para o usuario final. Trabalhei de perto com design e produto para transformar ideias em interfaces reais.",
+      "Working on e-commerce and B2B platforms, focusing on performance, scalability, and user experience. Contributed to projects within Nestlé Health Science, integrating digital health and nutrition solutions.",
     highlights: [
-      "Criei e evolui componentes reutilizaveis, reduzindo retrabalho nas entregas.",
-      "Melhorei fluxos criticos da aplicacao, com foco em clareza e navegacao.",
-      "Participei de revisoes de codigo e padronizacao do front-end do time.",
+      "Improved platform performance and stability in production environments.",
+      "Developed and maintained scalable front-end applications.",
+      "Collaborated with cross-functional teams on product-driven solutions.",
     ],
   },
   {
     company: "Smart Innovation",
-    role: "Mobile Developer",
-    period: "2022 - 2024",
+    role: "Software Engineer",
+    period: "Feb 2022 - Feb 2024",
     summary:
-      "Participei da construcao de features do inicio ao fim, conectando front-end e back-end. Foi um periodo importante para fortalecer visao de produto, comunicacao com o time e senso de ownership.",
+      "Developed mobile and web applications from architecture to deployment, contributing to citizen services and health monitoring solutions.",
     highlights: [
-      "Implementei novas funcionalidades em React e APIs para suportar fluxos internos.",
-      "Corrigi bugs recorrentes e reduzi chamados com melhorias incrementais.",
-      "Documentei solucoes tecnicas para facilitar onboarding e manutencao.",
+      "Built and maintained React Native apps published on iOS and Android.",
+      "Implemented features like push notifications, localization, and CI/CD pipelines.",
+      "Worked across front-end and back-end, improving app reliability and user experience.",
     ],
   },
   {
     company: "Klupp",
-    role: "Full stack Developer (internship)",
-    period: "2021 - 2022",
+    role: "Full-Stack Developer",
+    period: "Sep 2021 - Feb 2022",
     summary:
-      "Meu primeiro contato profissional com desenvolvimento. Aprendi fundamentos de colaboracao em equipe, versionamento e entrega continua, sempre com acompanhamento de pessoas mais experientes.",
+      "Worked across the full development lifecycle, building mobile applications with focus on performance and user experience.",
     highlights: [
-      "Apoiei manutencao de interfaces e ajustes em tarefas de baixa e media complexidade.",
-      "Aprendi boas praticas de Git, revisao de PR e escrita de codigo legivel.",
-      "Ganhei base tecnica e mentalidade de melhoria continua.",
+      "Developed features using React Native and TypeScript.",
+      "Integrated APIs and handled data management across platforms.",
+      "Supported deployment and maintenance of mobile applications.",
+    ],
+  },
+  {
+    company: "BRF",
+    role: "Logistics Intern",
+    period: "Jan 2021 - Sep 2021",
+    summary:
+      "Supported logistics operations by improving data organization and process efficiency in cargo distribution.",
+    highlights: [
+      "Created and maintained spreadsheets for load tracking.",
+      "Helped optimize operational workflows.",
     ],
   },
 ];
