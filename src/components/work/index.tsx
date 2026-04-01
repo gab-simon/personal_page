@@ -12,7 +12,7 @@ const workEntries: WorkEntry[] = [
   {
     company: "Nestlé Health Science - Puravida",
     role: "Software Engineer",
-    period: "Feb 2024 - Present",
+    period: "Feb 2025 - Present",
     summary:
       "Working on e-commerce and B2B platforms, focusing on performance, scalability, and user experience. Contributed to projects within Nestlé Health Science, integrating digital health and nutrition solutions.",
     highlights: [
@@ -24,7 +24,7 @@ const workEntries: WorkEntry[] = [
   {
     company: "Smart Innovation",
     role: "Software Engineer",
-    period: "Feb 2022 - Feb 2024",
+    period: "Feb 2023 - Feb 2025",
     summary:
       "Developed mobile and web applications from architecture to deployment, contributing to citizen services and health monitoring solutions.",
     highlights: [
@@ -36,7 +36,7 @@ const workEntries: WorkEntry[] = [
   {
     company: "Klupp",
     role: "Full-Stack Developer",
-    period: "Sep 2021 - Feb 2022",
+    period: "Sep 2021 - Feb 2023",
     summary:
       "Worked across the full development lifecycle, building mobile applications with focus on performance and user experience.",
     highlights: [
