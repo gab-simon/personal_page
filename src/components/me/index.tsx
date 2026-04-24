@@ -22,25 +22,25 @@ const Me = () => {
 
           <Reveal delay={0.16}>
             <p className="text-lg md:text-xl leading-relaxed text-foreground/85 max-w-2xl mb-6">
-              I’m Simon. I enjoy many things beyond technology, and lately I’ve
-              been trying to do more activities away from the screen, not just
-              working, studying, and gaming. I really enjoy cooking and playing
-              football.
+              I’m Simon. Outside of tech, I’ve been trying to spend more time
+              away from screens and make room for life beyond work, study, and
+              games. I especially enjoy cooking and playing football.
             </p>
           </Reveal>
 
           <Reveal delay={0.24}>
             <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-2xl mb-6">
-              Here I combine code, writing, and a bit of life outside the
-              screen. Between one idea and another, I like to study new
-              technologies, cook, organize thoughts, and document the process.
+              This is where I bring together code, writing, and a bit of what
+              happens outside the screen. Between one idea and the next, I like
+              to explore new technologies, cook, organize my thoughts, and
+              document what I learn.
             </p>
           </Reveal>
 
           <Reveal delay={0.32}>
             <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-2xl">
-              This space is an extension of who I am now: someone in
-              construction, focused on evolving one step at a time.
+              This space reflects who I am today: a work in progress, focused
+              on growing one step at a time.
             </p>
           </Reveal>
         </div>
