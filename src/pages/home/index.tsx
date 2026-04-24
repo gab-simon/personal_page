@@ -2,6 +2,7 @@ import Header from "../../components/header";
 import FloatingActions from "../../components/fabs";
 import Me from "../../components/me";
 import Work from "../../components/work";
+import Blog from "../../components/blog";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Header />
       <Me />
       <Work />
+      <Blog />
       <FloatingActions />
     </div>
   );

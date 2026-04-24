@@ -1,11 +1,29 @@
 import LiquidBackground from "../fx/liquid-bg";
 import Reveal from "../fx/reveal";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <section className="min-h-[85vh] flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-20 relative overflow-hidden">
       <LiquidBackground />
       <div className="relative z-10">
+        <Reveal>
+          <nav className="mb-10 flex items-center gap-6">
+            <Link
+              to="/"
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/70 transition-colors duration-300 hover:text-foreground"
+            >
+              home
+            </Link>
+            <Link
+              to="/blog"
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/70 transition-colors duration-300 hover:text-foreground"
+            >
+              blog
+            </Link>
+          </nav>
+        </Reveal>
+
         <Reveal>
           <p className="font-mono text-xs text-muted-foreground tracking-widest mb-8">
             last update: mar 2026

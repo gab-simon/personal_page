@@ -10,15 +10,15 @@ type WorkEntry = {
 
 const workEntries: WorkEntry[] = [
   {
-    company: "Nestlé Health Science - Puravida",
-    role: "Software Engineer",
+    company: "Nestlé (via Mathex Consulting)",
+    role: "Senior Software Developer",
     period: "Feb 2025 - Present",
     summary:
-      "Working on e-commerce and B2B platforms, focusing on performance, scalability, and user experience. Contributed to projects within Nestlé Health Science, integrating digital health and nutrition solutions.",
+      "Maintaining and evolving the third largest Nestlé e-commerce platform, built on Wake Commerce, delivering new features and ensuring stability, performance, and scalability using React, Node.js, Next.js, and Vite.",
     highlights: [
-      "Improved platform performance and stability in production environments.",
-      "Developed and maintained scalable front-end applications.",
-      "Collaborated with cross-functional teams on product-driven solutions.",
+      "Contributed to scaling a B2B platform with ERP integrations, improving workflows for retailers and sales teams and optimizing operational efficiency.",
+      "Designed, maintained, and developed multiple CMS solutions within the Nestlé Health Science ecosystem, including a standardized low-code email builder platform for marketing and communication operations.",
+      "Technologies: React, Next.js, Vite, TypeScript, Docker, React Native, Azure DevOps, CI/CD, Git, Wake.",
     ],
   },
   {
@@ -26,23 +26,23 @@ const workEntries: WorkEntry[] = [
     role: "Software Engineer",
     period: "Feb 2023 - Feb 2025",
     summary:
-      "Developed mobile and web applications from architecture to deployment, contributing to citizen services and health monitoring solutions.",
+      "Architected and led the mobile foundation of CADU and CADU Agente, citizen service apps focused on scheduling appointments, opening city hall requests, and accessing municipal news.",
     highlights: [
-      "Built and maintained React Native apps published on iOS and Android.",
-      "Implemented features like push notifications, localization, and CI/CD pipelines.",
-      "Worked across front-end and back-end, improving app reliability and user experience.",
+      "Built the base architecture, developed core features, managed store releases, and implemented CI/CD with Fastlane, push notifications, localization, and scalable Redux state management — surpassing 10,000+ downloads.",
+      "Worked on SeniorCheck, a healthcare monitoring platform for elderly users, developing secure backend endpoints for user registration and integrating mobile features with existing APIs.",
+      "Technologies: React Native, Redux, React, Styled Components, Firebase, TypeScript, Fastlane, Jest, Detox, Python, Django, Ionic, Docker.",
     ],
   },
   {
     company: "Klupp",
-    role: "Full-Stack Developer",
+    role: "Full-Stack Software Engineer",
     period: "Sep 2021 - Feb 2023",
     summary:
-      "Worked across the full development lifecycle, building mobile applications with focus on performance and user experience.",
+      "Worked as a Mobile Application Developer across the full project lifecycle, from defining scalable base architectures to publishing applications on Android and iOS stores.",
     highlights: [
-      "Developed features using React Native and TypeScript.",
-      "Integrated APIs and handled data management across platforms.",
-      "Supported deployment and maintenance of mobile applications.",
+      "Developed critical features such as geolocation, push notifications, offline-first storage with SQLite and Redux, and integrations focused on performance and user experience.",
+      "Contributed to projects across benefits, energy, logistics, and offline operation systems — including Brasil Convênios, which surpassed 50,000+ downloads.",
+      "Technologies: React Native, TypeScript, Node.js, Firebase, Ionic, SQLite, Redux, Android, iOS, JavaScript, Git.",
     ],
   },
   {
