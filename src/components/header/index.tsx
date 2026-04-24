@@ -26,7 +26,7 @@ const Header = () => {
 
         <Reveal>
           <p className="font-mono text-xs text-muted-foreground tracking-widest mb-8">
-            last update: mar 2026
+            last update: april 2026
           </p>
         </Reveal>
         <Reveal delay={0.15}>
