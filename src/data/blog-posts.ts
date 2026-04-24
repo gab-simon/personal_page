@@ -10,15 +10,15 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     slug: "why-i-still-love-mobile",
-    title: "Why I Still Love Mobile Development",
+    title: "Por que eu ainda gosto de desenvolvimento mobile",
     date: "Feb 2026",
     readingTime: "4 min read",
     excerpt:
-      "Mobile development keeps me close to real user problems, where performance and experience matter in every interaction.",
+      "Desenvolvimento mobile sempre me mantém perto dos problemas reais das pessoas, onde performance e experiência fazem diferença em cada toque na tela.",
     content: [
-      "Mobile apps force us to be intentional. Network is unstable, devices vary a lot, and attention is limited. This environment teaches discipline in architecture and UX decisions.",
-      "I still enjoy the challenge of making experiences feel smooth even under constraints. Features like offline support, push notifications, and local caching are hard, but very rewarding when done right.",
-      "In the end, mobile reminds me that software is not only about code. It is about trust, reliability, and making life easier for people.",
+      "Criar apps exige intenção em cada detalhe. A internet nem sempre funciona bem, os aparelhos são diferentes entre si e a atenção do usuário é curta. Esse cenário ensina muito sobre simplicidade, arquitetura e boas decisões de experiência.",
+      "Eu ainda gosto do desafio de fazer tudo parecer leve e fluido mesmo com limitações. Recursos como modo offline, notificações push e cache local dão trabalho, mas quando funcionam bem, o resultado é muito satisfatório.",
+      "No fim, mobile sempre me lembra que software não é só código. É confiança, praticidade e facilitar a vida de quem usa.",
     ],
   },
 ];
