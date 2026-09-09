@@ -1,13 +1,41 @@
 <!doctype html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR" data-theme="dark" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>simon</title>
-    <meta name="description" content="personal page of a full-stack developer." />
-    <meta property="og:title" content="simon" />
-    <meta property="og:description" content="personal page of a full-stack developer." />
-    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#0A0708" />
+    <title>Gabriel Simon — Full Stack Developer</title>
+    <meta name="description" content="Gabriel Simon, desenvolvedor Full Stack. Desenvolvimento e evolução de plataformas web e e-commerce. Currículo, experiência e contato em uma página." />
+    <meta name="author" content="Gabriel Simon" />
+    <link rel="canonical" href="https://gab-simon.app/" />
+    <meta property="og:title" content="Gabriel Simon — Full Stack Developer" />
+    <meta property="og:description" content="Desenvolvedor Full Stack. Desenvolvimento e evolução de plataformas web e e-commerce." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://gab-simon.app/" />
+    <meta property="og:image" content="https://gab-simon.app/og-image.jpg" />
+    <meta property="og:image:alt" content="Gabriel Simon, Full Stack Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gabriel Simon — Full Stack Developer" />
+    <meta name="twitter:description" content="Desenvolvedor Full Stack. Desenvolvimento e evolução de plataformas web e e-commerce." />
+    <meta name="twitter:image" content="https://gab-simon.app/og-image.jpg" />
+    <script>
+      // Applies the stored / system theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var stored = localStorage.getItem('gs-theme');
+          var theme = stored === 'light' || stored === 'dark'
+            ? stored
+            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          var root = document.documentElement;
+          root.dataset.theme = theme;
+          root.classList.toggle('dark', theme === 'dark');
+          root.classList.toggle('light', theme === 'light');
+          var stored_lang = localStorage.getItem('gs-lang');
+          root.lang = (stored_lang === 'en' || (!stored_lang && !(navigator.language || '').toLowerCase().startsWith('pt'))) ? 'en' : 'pt-BR';
+        } catch (e) { /* keep the markup defaults */ }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

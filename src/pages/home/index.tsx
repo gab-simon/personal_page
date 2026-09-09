@@ -1,19 +1,17 @@
 import Header from "../../components/header";
-import FloatingActions from "../../components/fabs";
-import Me from "../../components/me";
-import Work from "../../components/work";
-import Blog from "../../components/blog";
+import Hero from "../../components/hero";
+import Profile from "../../components/profile";
+import Footer from "../../components/footer";
 
-const Home = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Me />
-      <Work />
-      <Blog />
-      <FloatingActions />
-    </div>
-  );
-};
+const Home = () => (
+  <div className="min-h-screen bg-background">
+    <Header />
+    <main>
+      <Hero />
+      <Profile />
+    </main>
+    <Footer />
+  </div>
+);
 
 export default Home;
