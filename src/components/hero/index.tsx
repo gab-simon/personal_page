@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, type PanInfo, useAnimationControls, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import cvPdf from "../../assets/gabriel-simon-cv.pdf";
@@ -6,7 +6,9 @@ import { contactLinks } from "../../data/profile";
 import { useI18n } from "../../i18n/context";
 
 const REST = 2;
-const PULL_MAX = 62;
+/* The sheet only creeps out of the slot while attached: pulling further tears it off instead of
+   exposing a tall blank band of paper above the ticket. */
+const PULL_MAX = 28;
 const CUT_REST = 72;
 
 const Hero = () => {
@@ -21,9 +23,44 @@ const Hero = () => {
   const [detached, setDetached] = useState(false);
   const [pulling, setPulling] = useState(false);
   const [cutting, setCutting] = useState(false);
+  const [reinserting, setReinserting] = useState(false);
   /* -1 when the sheet is held on its left edge, 1 on its right — the paper tilts around that point. */
   const [tilt, setTilt] = useState(0);
+  /* How far the loose sheet may travel before it would run past the hero and get clipped. */
+  const [room, setRoom] = useState({ left: -120, right: 120, down: 120 });
   const pt = lang === "pt";
+
+  const measureRoom = useCallback(() => {
+    const ticket = ticketRef.current;
+    const chute = ticket?.parentElement;
+    const hero = ticket?.closest("section");
+    if (!ticket || !chute || !hero) return;
+    const heroBox = hero.getBoundingClientRect();
+    const chuteBox = chute.getBoundingClientRect();
+    const gap = 30;
+    const baseLeft = chuteBox.left + ticket.offsetLeft;
+    const baseRight = baseLeft + ticket.offsetWidth;
+    const available = (value: number, minimum = 0) => Math.max(minimum, Math.round(value));
+    setRoom({
+      left: -available(baseLeft - heroBox.left - gap),
+      right: available(heroBox.right - gap - baseRight),
+      down: available(heroBox.bottom - gap - (chuteBox.top + ticket.offsetHeight), 40),
+    });
+  }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(measureRoom);
+    const hero = ticketRef.current?.closest("section");
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measureRoom);
+    if (hero) observer?.observe(hero);
+    if (ticketRef.current) observer?.observe(ticketRef.current);
+    window.addEventListener("resize", measureRoom);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
+      window.removeEventListener("resize", measureRoom);
+    };
+  }, [measureRoom]);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -64,17 +101,30 @@ const Hero = () => {
     setHandled(true);
     setPulling(false);
     setCutting(true);
-    // the sheet snaps off the blade, then drops free
-    await controls.start({ y: PULL_MAX - 6, scaleY: 0.993, rotateX: 1.6, rotateZ: tilt * -0.9, transition: { duration: 0.11, ease: "easeOut" } });
+    // Tension builds against the blade before the paper gives way.
+    await controls.start({ y: PULL_MAX - 10, scaleY: 0.997, rotateX: 0.8, rotateZ: tilt * -0.35, transition: { duration: 0.13, ease: "easeOut" } });
+    await controls.start({ y: PULL_MAX + 3, scaleY: 0.991, rotateX: 1.7, rotateZ: tilt * -0.9, transition: { duration: 0.09, ease: "easeIn" } });
     setDetached(true);
-    window.setTimeout(() => setCutting(false), 180);
     await controls.start({
       y: CUT_REST,
       scaleY: 1,
       rotateX: 0,
       rotateZ: tilt * 0.7,
-      transition: { type: "spring", stiffness: 200, damping: 15, mass: 0.9 },
+      transition: { type: "spring", stiffness: 230, damping: 19, mass: 0.82 },
     });
+    setCutting(false);
+  };
+
+  const reinsert = async () => {
+    if (!detached || reinserting) return;
+    setPulling(false);
+    setReinserting(true);
+    // The rollers first centre the loose sheet, then pull its leading edge in.
+    await controls.start({ x: 0, y: 25, rotateX: -1.2, rotateZ: 0, scaleY: 0.997, transition: { type: "spring", stiffness: 330, damping: 27, mass: 0.72 } });
+    setDetached(false);
+    await controls.start({ x: 0, y: REST, rotateX: 0, rotateZ: 0, scaleY: 1, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } });
+    setReinserting(false);
+    setHandled(false);
   };
 
   const startPull = (event: MouseEvent | TouchEvent | PointerEvent) => {
@@ -87,19 +137,40 @@ const Hero = () => {
   };
 
   const endPull = (info: PanInfo) => {
-    if (!detached && (info.offset.y > 38 || info.velocity.y > 520)) {
-      void cut();
+    if (!detached) {
+      if (info.offset.y > 38 || info.velocity.y > 520) {
+        void cut();
+        return;
+      }
+      setPulling(false);
+      void settle();
       return;
     }
+    const ticketBox = ticketRef.current?.getBoundingClientRect();
+    const chuteBox = ticketRef.current?.parentElement?.getBoundingClientRect();
+    const nearSlot = ticketBox && chuteBox
+      ? ticketBox.top - chuteBox.top < 46 && Math.abs((ticketBox.left + ticketBox.width / 2) - (chuteBox.left + chuteBox.width / 2)) < Math.min(130, ticketBox.width * 0.28)
+      : false;
+    if (nearSlot) {
+      void reinsert();
+      return;
+    }
+    /* Once cut the sheet is loose: it stays wherever it is dropped, only the tilt eases out. */
     setPulling(false);
-    void settle();
+    void controls.start({ rotateX: 0, rotateZ: tilt * 0.8, scaleY: 1, transition: { type: "spring", stiffness: 240, damping: 22 } });
   };
 
   const nudge = async () => {
     if (!printed) return;
     if (coarse && !detached) return void cut();
     setHandled(true);
-    await controls.start({ y: (detached ? CUT_REST : REST) + 13, rotateX: 1.2, transition: { type: "spring", stiffness: 420, damping: 20 } });
+    if (detached) {
+      // a loose sheet flutters where it lies instead of jumping back
+      await controls.start({ rotateZ: tilt * 0.8 + 0.9, rotateX: 1.2, transition: { duration: 0.12, ease: "easeOut" } });
+      await controls.start({ rotateZ: tilt * 0.8, rotateX: 0, transition: { type: "spring", stiffness: 300, damping: 12 } });
+      return;
+    }
+    await controls.start({ y: REST + 13, rotateX: 1.2, transition: { type: "spring", stiffness: 420, damping: 20 } });
     await settle();
   };
 
@@ -108,6 +179,7 @@ const Hero = () => {
     handled ? "printer--handled" : "",
     pulling ? "printer--pulling" : "",
     cutting ? "printer--cutting" : "",
+    reinserting ? "printer--reinserting" : "",
     detached ? "printer--detached" : "",
     coarse ? "printer--touch" : "",
   ].join(" ");
@@ -126,10 +198,11 @@ const Hero = () => {
             className="ticket"
             initial={reduceMotion ? false : { y: "-101%", rotateX: -9, rotateZ: 0, scaleY: 0.985 }}
             animate={controls}
-            drag={printed && !coarse ? "y" : false}
-            dragConstraints={detached ? { top: CUT_REST - 16, bottom: CUT_REST + 16 } : { top: 0, bottom: PULL_MAX }}
-            dragElastic={{ top: 0, bottom: 0.08 }}
-            dragMomentum={false}
+            drag={printed && !coarse && !reinserting ? (detached ? true : "y") : false}
+            dragConstraints={detached ? { top: 26, bottom: room.down, left: room.left, right: room.right } : { top: 0, bottom: PULL_MAX }}
+            dragElastic={detached ? 0.09 : { top: 0, bottom: 0.08 }}
+            dragMomentum={detached}
+            dragTransition={{ power: 0.16, timeConstant: 200, bounceStiffness: 190, bounceDamping: 24 }}
             onDragStart={(event) => startPull(event)}
             onDragEnd={(_, info) => endPull(info)}
             onTap={() => void nudge()}
