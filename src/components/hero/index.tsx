@@ -162,7 +162,7 @@ const Hero = () => {
 
   const nudge = async () => {
     if (!printed) return;
-    if (coarse && !detached) return void cut();
+    if (coarse) return void (detached ? reinsert() : cut());
     setHandled(true);
     if (detached) {
       // a loose sheet flutters where it lies instead of jumping back
@@ -216,7 +216,6 @@ const Hero = () => {
                   <p>PASSENGER</p><h1 id="ticket-name">GABRIEL<br />SIMON</h1>
                   <div><span>ROLE</span><strong>FULL STACK DEVELOPER</strong></div>
                 </div>
-                <p className="ticket-summary">{pt ? "Produtos digitais simples, úteis e bem construídos." : "Simple, useful and well-built digital products."}</p>
                 <div className="ticket-facts">
                   <div><span>BASE</span><strong>CURITIBA, BR · {pt ? "REMOTO" : "REMOTE"}</strong></div>
                   <div><span>{pt ? "EXPERIÊNCIA" : "EXPERIENCE"}</span><strong>5+ {pt ? "ANOS" : "YEARS"}</strong></div>
