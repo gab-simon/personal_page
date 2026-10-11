@@ -6,7 +6,7 @@ const Profile = () => {
   return <div className="editorial-wrap">
     <section id="about" className="editorial-section about-section">
       <p className="section-label">01 / {pt ? "SOBRE" : "ABOUT"}</p>
-      <p className="about-copy">{pt ? "Sou desenvolvedor Full Stack. Trabalho no desenvolvimento e na evolução de plataformas web e de e-commerce, depois de alguns anos construindo aplicativos mobile." : "I'm a Full Stack Developer. I build and evolve web and e-commerce platforms, after a few years building mobile applications."}</p>
+      <p className="about-copy">{pt ? "Sou desenvolvedor Full Stack. Trabalho no desenvolvimento e na evolução de plataformas web e de e-commerce, depois de alguns anos construindo aplicativos mobile." : "I'm a Full Stack Developer. I build and evolve web and e-commerce platforms, after a few years of building mobile apps."}</p>
       <p className="about-meta">5+ {pt ? "ANOS DE EXPERIÊNCIA" : "YEARS OF EXPERIENCE"}<br />{pt ? "CIÊNCIA DA COMPUTAÇÃO / UFPR" : "COMPUTER SCIENCE / UFPR"}<br />CURITIBA / BR</p>
     </section>
     <section id="experience" className="editorial-section">
