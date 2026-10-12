@@ -46,7 +46,7 @@ const pt = {
       summary: "Manutenção e evolução do terceiro maior e-commerce da Nestlé, construído em Wake Commerce.",
       details: [
         "Entrego novas funcionalidades e cuido da estabilidade, da performance e da escalabilidade da plataforma, com React, Next.js, Node.js e Vite.",
-        "Também ajudei a escalar uma plataforma B2B com integrações de ERP, que melhorou o trabalho de varejistas e times de vendas, e mantenho soluções internas de CMS no ecossistema Nestlé Health Science, incluindo um construtor de e-mails low-code usado por marketing e comunicação.",
+        "Também ajudei a escalar uma plataforma B2B integrada ao ERP, que facilitou o dia a dia de varejistas e times de vendas, e mantenho soluções internas de CMS no ecossistema Nestlé Health Science, incluindo um construtor de e-mails low-code usado por marketing e comunicação.",
       ],
       platforms: [
         {
@@ -55,7 +55,7 @@ const pt = {
         },
         {
           name: "Plataforma B2B",
-          text: "Integrações com ERP para a operação de varejistas e times de vendas.",
+          text: "Integrações com ERP que apoiam varejistas e times de vendas.",
         },
       ],
     },
@@ -64,18 +64,18 @@ const pt = {
       period: "2023 — 2025",
       summary: "Base mobile do CADU e do CADU Agente, apps de serviços ao cidadão com mais de 10 mil downloads.",
       details: [
-        "Conduzi a arquitetura mobile do CADU e do CADU Agente, usados para agendar atendimentos, abrir solicitações à prefeitura e acompanhar notícias do município.",
-        "Construí a arquitetura base, as funcionalidades principais, as publicações nas lojas e o CI/CD com Fastlane, além de push, localização e estado com Redux. No SeniorCheck, plataforma de monitoramento de saúde de idosos, desenvolvi endpoints de cadastro e integrei o aplicativo às APIs existentes.",
+        "Conduzi a arquitetura mobile do CADU e do CADU Agente, usados pelos moradores para agendar atendimentos, abrir solicitações à prefeitura e acompanhar as notícias da cidade.",
+        "Construí a arquitetura base, as funcionalidades principais, as publicações nas lojas e o CI/CD com Fastlane, além de notificações push, geolocalização e estado com Redux. No SeniorCheck, plataforma de monitoramento de saúde de idosos, desenvolvi endpoints de cadastro e integrei o aplicativo às APIs existentes.",
       ],
       platforms: [],
     },
     klupp: {
       role: "Desenvolvedor Full Stack",
       period: "2021 — 2023",
-      summary: "Aplicativos de benefícios, energia e logística, incluindo o Brasil Convênios, com mais de 50 mil downloads.",
+      summary: "Aplicativos de benefícios, energia e logística, entre eles o Brasil Convênios, com mais de 50 mil downloads.",
       details: [
         "Trabalhei no ciclo completo dos produtos mobile, da definição de arquiteturas base reaproveitáveis à publicação nas lojas Android e iOS.",
-        "Desenvolvi funcionalidades como geolocalização, notificações push e armazenamento offline-first com SQLite e Redux, sempre com atenção a performance e experiência de uso.",
+        "Desenvolvi funcionalidades como geolocalização, notificações push e armazenamento offline-first com SQLite e Redux, sempre com atenção à performance e à experiência de uso.",
       ],
       platforms: [],
     },
@@ -155,19 +155,19 @@ const en: Copy = {
     nestle: {
       role: "Senior Full Stack Developer · via Mathex",
       period: "2025 — now",
-      summary: "Maintaining and evolving the third largest Nestlé e-commerce platform, built on Wake Commerce.",
+      summary: "Maintaining and evolving Nestlé's third-largest e-commerce platform, built on Wake Commerce.",
       details: [
         "I deliver new features and look after the stability, performance and scalability of the platform, using React, Next.js, Node.js and Vite.",
-        "I also helped scale a B2B platform with ERP integrations, improving the work of retailers and sales teams, and I maintain internal CMS solutions across the Nestlé Health Science ecosystem, including a low-code email builder used by marketing and communication.",
+        "I also helped scale a B2B platform integrated with the ERP, making day-to-day work easier for retailers and sales teams, and I maintain internal CMS solutions across the Nestlé Health Science ecosystem, including a low-code email builder used by marketing and communication.",
       ],
       platforms: [
         {
           name: "E-commerce",
-          text: "Third largest Nestlé e-commerce platform worldwide, built on Wake Commerce.",
+          text: "Nestlé's third-largest e-commerce platform worldwide, built on Wake Commerce.",
         },
         {
           name: "B2B platform",
-          text: "ERP integrations for retailer and sales team operations.",
+          text: "ERP integrations supporting retailers and sales teams.",
         },
       ],
     },
@@ -176,17 +176,17 @@ const en: Copy = {
       period: "2023 — 2025",
       summary: "Mobile foundation of CADU and CADU Agente, citizen-service apps with 10,000+ downloads.",
       details: [
-        "I led the mobile architecture of CADU and CADU Agente, used to book appointments, open city hall requests and follow municipal news.",
-        "I built the base architecture, the core features, the store releases and CI/CD with Fastlane, along with push notifications, localization and Redux state. On SeniorCheck, a health monitoring platform for elderly users, I developed registration endpoints and integrated the app with existing APIs.",
+        "I led the mobile architecture of CADU and CADU Agente, which residents use to book appointments, file requests with the city and follow local news.",
+        "I built the base architecture, the core features, the store releases and CI/CD with Fastlane, along with push notifications, geolocation and Redux state. On SeniorCheck, a health monitoring platform for elderly users, I developed registration endpoints and integrated the app with existing APIs.",
       ],
       platforms: [],
     },
     klupp: {
       role: "Full Stack Developer",
       period: "2021 — 2023",
-      summary: "Benefits, energy and logistics apps, including Brasil Convênios, with 50,000+ downloads.",
+      summary: "Benefits, energy and logistics apps, including Brasil Convênios with 50,000+ downloads.",
       details: [
-        "I worked across the full lifecycle of mobile products, from defining reusable base architectures to publishing on the Android and iOS stores.",
+        "I worked across the whole lifecycle of mobile products, from defining reusable base architectures to publishing on the Android and iOS stores.",
         "I built features such as geolocation, push notifications and offline-first storage with SQLite and Redux, always with an eye on performance and user experience.",
       ],
       platforms: [],

@@ -211,10 +211,10 @@ const Hero = () => {
           >
             <div className="ticket-sheet">
               <div className="ticket-main">
-                <div className="ticket-topline"><span>PORTFOLIO / 2026</span><span>GS 0042</span></div>
+                <div className="ticket-topline"><span>{pt ? "PORTFÓLIO" : "PORTFOLIO"} / 2026</span><span>GS 0042</span></div>
                 <div className="ticket-identity">
-                  <p>PASSENGER</p><h1 id="ticket-name">GABRIEL<br />SIMON</h1>
-                  <div><span>ROLE</span><strong>FULL STACK DEVELOPER</strong></div>
+                  <p>{pt ? "PASSAGEIRO" : "PASSENGER"}</p><h1 id="ticket-name">GABRIEL<br />SIMON</h1>
+                  <div><span>{pt ? "CARGO" : "ROLE"}</span><strong>FULL STACK DEVELOPER</strong></div>
                 </div>
                 <div className="ticket-facts">
                   <div><span>BASE</span><strong>CURITIBA, BR · {pt ? "REMOTO" : "REMOTE"}</strong></div>
@@ -225,7 +225,7 @@ const Hero = () => {
               </div>
 
               <div className="ticket-stub">
-                <div className="stub-heading"><span>DOC</span><strong>CURRICULUM</strong></div>
+                <div className="stub-heading"><span>DOC</span><strong>{pt ? "CURRÍCULO" : "CURRICULUM"}</strong></div>
                 <div className="ticket-actions" aria-label={pt ? "Ações do currículo" : "Résumé actions"}>
                   <Link to="/resume" className="ticket-action" onPointerDown={(event) => event.stopPropagation()}><span>01</span><strong>{pt ? "VER CV" : "VIEW CV"}</strong><b>↗</b></Link>
                   <a href={cvPdf} download="gabriel-simon-cv.pdf" className="ticket-action ticket-action--dark" onPointerDown={(event) => event.stopPropagation()}><span>02</span><strong>{pt ? "BAIXAR PDF" : "DOWNLOAD PDF"}</strong><b>↓</b></a>
@@ -243,7 +243,7 @@ const Hero = () => {
                     </a>
                   ))}
                 </div>
-                <span className="stub-serial">VALID / 2026 · GS</span>
+                <span className="stub-serial">{pt ? "VÁLIDO" : "VALID"} / 2026 · GS</span>
               </div>
             </div>
           </motion.article>
