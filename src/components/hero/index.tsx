@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, type PanInfo, useAnimationControls, useReducedMotion } from "framer-motion";
+import { motion, type PanInfo, useAnimationControls, useDragControls, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import cvPdf from "../../assets/gabriel-simon-cv.pdf";
 import { contactLinks } from "../../data/profile";
@@ -11,12 +11,16 @@ const REST = 2;
 const PULL_MAX = 28;
 const CUT_REST = 72;
 
+/* A short tick on phones that support it, so the tear and the feed-back are felt as well as seen. */
+const buzz = (pattern: number | number[]) => navigator.vibrate?.(pattern);
+
 const Hero = () => {
   const { lang } = useI18n();
   const controls = useAnimationControls();
+  const dragControls = useDragControls();
   const reduceMotion = useReducedMotion();
   const ticketRef = useRef<HTMLElement>(null);
-  /* Touch keeps the page scrollable: there the ticket is cut by tapping it, not by dragging. */
+  /* Touch keeps the page scrollable: the ticket is only grabbed by its top strip, the rest scrolls. */
   const [coarse] = useState(() => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches);
   const [printed, setPrinted] = useState(Boolean(reduceMotion));
   const [handled, setHandled] = useState(false);
@@ -105,6 +109,7 @@ const Hero = () => {
     await controls.start({ y: PULL_MAX - 10, scaleY: 0.997, rotateX: 0.8, rotateZ: tilt * -0.35, transition: { duration: 0.13, ease: "easeOut" } });
     await controls.start({ y: PULL_MAX + 3, scaleY: 0.991, rotateX: 1.7, rotateZ: tilt * -0.9, transition: { duration: 0.09, ease: "easeIn" } });
     setDetached(true);
+    buzz(14);
     await controls.start({
       y: CUT_REST,
       scaleY: 1,
@@ -122,6 +127,7 @@ const Hero = () => {
     // The rollers first centre the loose sheet, then pull its leading edge in.
     await controls.start({ x: 0, y: 25, rotateX: -1.2, rotateZ: 0, scaleY: 0.997, transition: { type: "spring", stiffness: 330, damping: 27, mass: 0.72 } });
     setDetached(false);
+    buzz([6, 40, 6]);
     await controls.start({ x: 0, y: REST, rotateX: 0, rotateZ: 0, scaleY: 1, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } });
     setReinserting(false);
     setHandled(false);
@@ -160,9 +166,14 @@ const Hero = () => {
     void controls.start({ rotateX: 0, rotateZ: tilt * 0.8, scaleY: 1, transition: { type: "spring", stiffness: 240, damping: 22 } });
   };
 
-  const nudge = async () => {
+  const nudge = async (target: EventTarget | null) => {
     if (!printed) return;
-    if (coarse) return void (detached ? reinsert() : cut());
+    if (coarse) {
+      // Any tap feeds a loose sheet back, but only the grip tears it, so scrolling never cuts by accident.
+      if (detached) void reinsert();
+      else if (target instanceof Element && target.closest(".ticket-grip")) void cut();
+      return;
+    }
     setHandled(true);
     if (detached) {
       // a loose sheet flutters where it lies instead of jumping back
@@ -187,10 +198,7 @@ const Hero = () => {
   return (
     <section id="top" className="ticket-hero" aria-labelledby="ticket-name">
       <div className={`printer ${state}`}>
-        <div className="printer-housing" aria-hidden="true">
-          <div className="printer-top"><i /></div>
-          <div className="printer-front"><div className="printer-slot"><span /></div></div>
-        </div>
+        <div className="printer-housing" aria-hidden="true"><div className="printer-slot" /></div>
 
         <div className="ticket-chute">
           <motion.article
@@ -198,17 +206,20 @@ const Hero = () => {
             className="ticket"
             initial={reduceMotion ? false : { y: "-101%", rotateX: -9, rotateZ: 0, scaleY: 0.985 }}
             animate={controls}
-            drag={printed && !coarse && !reinserting ? (detached ? true : "y") : false}
+            drag={printed && !reinserting ? (detached ? true : "y") : false}
+            dragControls={coarse ? dragControls : undefined}
+            dragListener={!coarse}
             dragConstraints={detached ? { top: 26, bottom: room.down, left: room.left, right: room.right } : { top: 0, bottom: PULL_MAX }}
             dragElastic={detached ? 0.09 : { top: 0, bottom: 0.08 }}
             dragMomentum={detached}
             dragTransition={{ power: 0.16, timeConstant: 200, bounceStiffness: 190, bounceDamping: 24 }}
             onDragStart={(event) => startPull(event)}
             onDragEnd={(_, info) => endPull(info)}
-            onTap={() => void nudge()}
+            onTap={(event) => void nudge(event.target)}
             whileDrag={{ rotateX: 1.2, rotateZ: tilt * 1.7, scaleY: 1.004 }}
             aria-label={pt ? "Bilhete profissional impresso." : "Printed professional ticket."}
           >
+            {coarse && <div className="ticket-grip" aria-hidden="true" onPointerDown={(event) => printed && dragControls.start(event)} />}
             <div className="ticket-sheet">
               <div className="ticket-main">
                 <div className="ticket-topline"><span>{pt ? "PORTFÓLIO" : "PORTFOLIO"} / 2026</span><span>GS 0042</span></div>
@@ -252,11 +263,13 @@ const Hero = () => {
         <div className="printer-contact-shadow" aria-hidden="true" />
       </div>
 
-      <button type="button" className="ticket-hint" onClick={() => void cut()} disabled={!printed || detached}>
+      <button type="button" className="ticket-hint" onClick={() => void (detached ? reinsert() : cut())} disabled={!printed || reinserting || (detached && !coarse)}>
         {detached
-          ? (pt ? "BILHETE CORTADO" : "TICKET TORN OFF")
+          ? coarse
+            ? (pt ? "DEVOLVER À IMPRESSORA ↑" : "FEED IT BACK ↑")
+            : (pt ? "BILHETE CORTADO" : "TICKET TORN OFF")
           : coarse
-            ? (pt ? "TOQUE PARA CORTAR ↓" : "TAP TO TEAR OFF ↓")
+            ? (pt ? "PUXE PELO TOPO OU TOQUE ↓" : "PULL THE TOP OR TAP ↓")
             : (pt ? "PUXE O BILHETE ↓" : "PULL THE TICKET ↓")}
       </button>
     </section>
